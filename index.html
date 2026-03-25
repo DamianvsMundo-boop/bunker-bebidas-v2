@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bunker de Bebidas</title>
+  <style>
+    :root{
+      --bg:#f5f1ec;
+      --primary:#8e1623;
+      --card:rgba(255,255,255,.72);
+      --border:rgba(142,22,35,.15);
+      --soft:rgba(142,22,35,.72);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--primary);
+    }
+    .serif{font-family: Georgia, "Times New Roman", serif}
+    .container{max-width:1180px;margin:0 auto;padding:0 24px}
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(245,241,236,.95);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:18px 0;
+    }
+    .eyebrow{
+      font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+      color:rgba(142,22,35,.65)
+    }
+    h1,h2,h3,h4,p{margin:0}
+    .brand{font-size:38px;font-weight:900;line-height:1}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      text-decoration:none;border-radius:999px;font-weight:800;
+      transition:.2s ease;cursor:pointer
+    }
+    .btn-outline{
+      border:1px solid var(--primary);color:var(--primary);
+      padding:12px 20px;background:transparent
+    }
+    .btn-outline:hover{background:var(--primary);color:var(--bg)}
+    .btn-solid{
+      background:var(--primary);color:var(--bg);
+      padding:14px 24px
+    }
+    .btn-solid:hover{transform:translateY(-1px);opacity:.95}
+    .hero{
+      padding:70px 0 44px;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center
+    }
+    .hero-title{
+      font-size:76px;font-weight:900;line-height:.95;margin-top:10px
+    }
+    .hero-text{
+      margin-top:24px;max-width:620px;font-size:18px;line-height:1.7;color:var(--soft)
+    }
+    .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:32px;
+      box-shadow:0 20px 60px rgba(142,22,35,.08)
+    }
+    .feature-card{padding:28px}
+    .split{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px
+    }
+    .mini{
+      background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:20px
+    }
+    .section{padding:12px 0}
+    .info-grid,.promo-grid,.products-grid,.contact-grid{
+      display:grid;gap:24px
+    }
+    .info-grid{grid-template-columns:repeat(3,1fr)}
+    .promo-grid{grid-template-columns:repeat(3,1fr)}
+    .products-grid{grid-template-columns:repeat(4,1fr)}
+    .contact-grid{grid-template-columns:repeat(3,1fr)}
+    .pad{padding:24px}
+    .tag-wrap{display:flex;flex-wrap:wrap;gap:12px}
+    .tag{
+      border:1px solid rgba(142,22,35,.2);
+      border-radius:999px;padding:10px 16px;
+      font-size:14px;font-weight:700;color:rgba(142,22,35,.85)
+    }
+    .section-title{
+      font-size:42px;font-weight:900;margin-top:8px
+    }
+    .section-head{
+      display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:26px
+    }
+    .muted{
+      color:rgba(142,22,35,.55);font-size:13px;font-weight:700;letter-spacing:.3em;text-transform:uppercase
+    }
+    .product-card{padding:20px}
+    .topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+    .badge{
+      display:inline-block;border-radius:999px;padding:7px 12px;
+      background:rgba(142,22,35,.05);border:1px solid rgba(142,22,35,.2);
+      font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase
+    }
+    .placeholder{
+      border-radius:24px;border:1px dashed rgba(142,22,35,.2);background:var(--bg);
+      min-height:180px;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;color:rgba(142,22,35,.35);font-size:13px;font-weight:800;
+      letter-spacing:.2em;text-transform:uppercase
+    }
+    .product-name{font-size:30px;font-weight:900;margin-top:18px}
+    .product-desc{margin-top:10px;font-size:14px;line-height:1.7;color:var(--soft)}
+    .price{margin-top:18px;font-size:34px;font-weight:900}
+    .contact{
+      background:var(--primary);color:var(--bg);padding:34px;border-radius:36px;
+      box-shadow:0 20px 60px rgba(142,22,35,.15)
+    }
+    .contact .muted{color:rgba(245,241,236,.72)}
+    .contact-text{max-width:760px;margin:16px auto 0;font-size:18px;line-height:1.7;color:rgba(245,241,236,.84)}
+    .contact-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:28px}
+    .btn-light{
+      background:var(--bg);color:var(--primary);padding:14px 24px
+    }
+    .btn-ghost{
+      border:1px solid rgba(245,241,236,.35);color:var(--bg);padding:14px 24px
+    }
+    footer{
+      border-top:1px solid rgba(142,22,35,.1);
+      padding:28px 24px 34px;
+      text-align:center;font-size:14px;font-weight:700;color:rgba(142,22,35,.5)
+    }
+    .cards-note{margin-top:10px;font-size:12px}
+    .cards-row{
+      margin-top:8px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;
+      font-size:18px
+    }
+    .cards-row span{font-weight:800}
+    .spacer{height:18px}
+    .smalltext{margin-top:12px;color:var(--soft);line-height:1.7}
+    @media (max-width: 1024px){
+      .hero-grid,.products-grid,.promo-grid,.info-grid,.contact-grid{grid-template-columns:1fr 1fr}
+      .hero-title{font-size:58px}
+      .products-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 720px){
+      .header-inner,.section-head,.hero-grid,.info-grid,.promo-grid,.products-grid,.contact-grid,.split{
+        grid-template-columns:1fr;display:grid
+      }
+      .header-inner{display:flex;flex-direction:column;align-items:flex-start}
+      .hero{padding-top:40px}
+      .hero-title{font-size:44px}
+      .brand{font-size:30px}
+      .section-title{font-size:32px}
+      .container{padding:0 16px}
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div>
+        <div class="eyebrow">Vinoteca · Promos · Pedidos</div>
+        <h1 class="brand serif">BUNKER DE BEBIDAS</h1>
+      </div>
+      <a class="btn btn-outline" href="https://wa.me/5493454158692" target="_blank">PEDIDOS</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow" style="border-bottom:1px solid rgba(142,22,35,.3);display:inline-block;padding-bottom:8px;">Estilo de marca · Elegancia · Venta directa</div>
+          <h2 class="hero-title serif">BUNKER <span style="opacity:.7">DE</span> BEBIDAS</h2>
+          <p class="hero-text">Una web con identidad fuerte, pensada para mostrar promociones, productos y pedidos con una estética más fina, sobria y parecida a tu logo.</p>
+          <div class="actions">
+            <a class="btn btn-solid" href="#productos">VER CATÁLOGO</a>
+            <a class="btn btn-outline" href="#ofertas" style="border-color:rgba(142,22,35,.3)">VER PROMOS</a>
+          </div>
+        </div>
+
+        <div class="card feature-card">
+          <div style="border-bottom:1px solid rgba(142,22,35,.15);padding-bottom:18px;">
+            <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.6)">Selección destacada</div>
+            <h3 class="serif" style="font-size:42px;font-weight:900;margin-top:12px;">FERNET + COLA</h3>
+            <p class="smalltext">Pedidos directos por WhatsApp, promos destacadas y una presencia elegante para tu negocio.</p>
+          </div>
+          <div class="split">
+            <div class="mini">
+              <div class="eyebrow" style="letter-spacing:.25em;color:rgba(142,22,35,.6)">Precio</div>
+              <div style="font-size:34px;font-weight:900;margin-top:8px">$18.900</div>
+            </div>
+            <div class="mini">
+              <div class="eyebrow" style="letter-spacing:.25em;color:rgba(142,22,35,.6)">Horario</div>
+              <div style="font-size:20px;font-weight:800;margin-top:8px">9:00 a 13:00 y desde las 17:00</div>
+            </div>
+          </div>
+          <div class="mini" style="margin-top:16px">
+            <div class="eyebrow" style="letter-spacing:.25em;color:rgba(142,22,35,.6)">Medios de pago</div>
+            <div class="tag-wrap" style="margin-top:12px">
+              <span class="tag">Efectivo</span>
+              <span class="tag">Transferencia</span>
+              <span class="tag">Tarjetas</span>
+              <span class="tag">QR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container info-grid">
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">WhatsApp</div>
+          <h4 class="serif" style="font-size:34px;font-weight:900;margin-top:12px">3454 15-8692</h4>
+          <p class="smalltext">Pedidos y consultas directas.</p>
+        </div>
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">Ubicación</div>
+          <h4 class="serif" style="font-size:34px;font-weight:900;margin-top:12px">Sarmiento 700</h4>
+          <p class="smalltext">Entre Ríos, Concordia.</p>
+        </div>
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">Horarios</div>
+          <p class="smalltext">
+            Mañana: 9:00 a 13:00<br>
+            Lunes a jueves: 17:00 a 22:00<br>
+            Viernes y sábados: 17:00 a 23:00
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card pad">
+          <div class="muted">Líneas destacadas</div>
+          <div class="tag-wrap" style="margin-top:16px">
+            <span class="tag">Whiskys</span>
+            <span class="tag">Vinos</span>
+            <span class="tag">Cervezas</span>
+            <span class="tag">Gin</span>
+            <span class="tag">Espumantes</span>
+            <span class="tag">Promociones</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="productos" style="padding-top:42px">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="muted">Catálogo</div>
+            <h3 class="section-title serif">PRODUCTOS DESTACADOS</h3>
+          </div>
+          <div style="font-size:14px;font-weight:700;color:rgba(142,22,35,.55)">Diseño basado en tu identidad visual</div>
+        </div>
+
+        <div class="products-grid">
+          <article class="card product-card">
+            <div class="topline">
+              <span class="badge">Selección</span>
+              <span class="eyebrow" style="letter-spacing:.15em;color:rgba(142,22,35,.4)">Stock</span>
+            </div>
+            <div class="placeholder">Imagen del producto</div>
+            <h4 class="product-name serif">Combo Fernet</h4>
+            <p class="product-desc">Fernet + 2 colas 2.25L</p>
+            <div class="price">$18.900</div>
+            <div class="spacer"></div>
+            <a class="btn btn-outline" href="https://wa.me/5493454158692" target="_blank">CONSULTAR</a>
+          </article>
+
+          <article class="card product-card">
+            <div class="topline">
+              <span class="badge">Destacado</span>
+              <span class="eyebrow" style="letter-spacing:.15em;color:rgba(142,22,35,.4)">Stock</span>
+            </div>
+            <div class="placeholder">Imagen del producto</div>
+            <h4 class="product-name serif">Promo Gin</h4>
+            <p class="product-desc">Tanqueray + 2 tónicas</p>
+            <div class="price">$37.100</div>
+            <div class="spacer"></div>
+            <a class="btn btn-outline" href="https://wa.me/5493454158692" target="_blank">CONSULTAR</a>
+          </article>
+
+          <article class="card product-card">
+            <div class="topline">
+              <span class="badge">Frías</span>
+              <span class="eyebrow" style="letter-spacing:.15em;color:rgba(142,22,35,.4)">Stock</span>
+            </div>
+            <div class="placeholder">Imagen del producto</div>
+            <h4 class="product-name serif">Pack Cervezas</h4>
+            <p class="product-desc">6 latas surtidas frías</p>
+            <div class="price">$12.500</div>
+            <div class="spacer"></div>
+            <a class="btn btn-outline" href="https://wa.me/5493454158692" target="_blank">CONSULTAR</a>
+          </article>
+
+          <article class="card product-card">
+            <div class="topline">
+              <span class="badge">Nuevo</span>
+              <span class="eyebrow" style="letter-spacing:.15em;color:rgba(142,22,35,.4)">Stock</span>
+            </div>
+            <div class="placeholder">Imagen del producto</div>
+            <h4 class="product-name serif">Vodka + Energética</h4>
+            <p class="product-desc">Ideal para previa</p>
+            <div class="price">$24.800</div>
+            <div class="spacer"></div>
+            <a class="btn btn-outline" href="https://wa.me/5493454158692" target="_blank">CONSULTAR</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ofertas" style="padding-top:24px">
+      <div class="container promo-grid">
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">Promo 01</div>
+          <h4 class="serif" style="font-size:38px;font-weight:900;margin-top:12px">Combos del finde</h4>
+          <p class="smalltext">Promociones especiales para viernes, sábado y domingo con una estética más premium.</p>
+        </div>
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">Promo 02</div>
+          <h4 class="serif" style="font-size:38px;font-weight:900;margin-top:12px">Entrega rápida</h4>
+          <p class="smalltext">Tomá pedidos por WhatsApp y mostrá una presencia más prolija y más fuerte de marca.</p>
+        </div>
+        <div class="card pad">
+          <div class="eyebrow" style="letter-spacing:.3em;color:rgba(142,22,35,.55)">Promo 03</div>
+          <h4 class="serif" style="font-size:38px;font-weight:900;margin-top:12px">Pagos simples</h4>
+          <p class="smalltext">Podés sumar alias, QR, ubicación y toda la info útil dentro de la misma web.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding:40px 0 50px">
+      <div class="container">
+        <div class="contact">
+          <div class="muted">Contacto</div>
+          <h3 class="serif" style="font-size:52px;font-weight:900;margin-top:10px;text-align:center">HACÉ TU PEDIDO</h3>
+          <p class="contact-text">Sarmiento 700, Concordia, Entre Ríos · Pedidos al 3454 15-8692 · Editá productos, precios y promos cuando quieras.</p>
+          <div class="contact-actions">
+            <a class="btn btn-light" href="https://wa.me/5493454158692" target="_blank">WHATSAPP</a>
+            <a class="btn btn-ghost" href="https://maps.google.com/?q=Sarmiento+700+Concordia+Entre+Rios" target="_blank">UBICACIÓN</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 BUNKER DE BEBIDAS · Catálogo · Promociones · Pedidos
+    <div class="cards-note">Aceptamos todas las tarjetas bancarias</div>
+    <div class="cards-row">
+      <span>💳</span>
+      <span>VISA</span>
+      <span>Mastercard</span>
+      <span>AMEX</span>
+      <span>Credicoop</span>
+    </div>
+  </footer>
+</body>
+</html>
